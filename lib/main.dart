@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
-
+import 'package:spellword/serviceLocator.dart';
+import 'package:spellword/translations/TranslationObject.dart';
+import 'package:spellword/translations/TranslationService.dart';
 import 'unauthorized/InformationPage.dart';
 import 'unauthorized/LoginPage.dart';
 import 'unauthorized/RegistrationPage.dart';
 
-void main() {
+void main() async {
+  setupServiceLocator();
+  await getTranslation();
   runApp(const MyApp());
+}
+
+Future<Translation> getTranslation() async {
+  final translations = TranslationService();
+  Translation translation = await translations.getTranslationObject();
+
+  return translation;
 }
 
 class MyApp extends StatelessWidget {
